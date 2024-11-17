@@ -42,7 +42,7 @@
   (apply mapv vector mat))
 
 (defn m*v [mat vec]
-  (mapv #(dot % vec) mat))
+  (all-oper #(dot % vec) mat))
 
 (defn m*m [& mats]
   (reduce (fn [res next]
