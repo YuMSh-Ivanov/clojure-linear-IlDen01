@@ -1,1 +1,1 @@
-@java --class-path "%~dp0lib/*" clojure.main %*
+@java -cp "%~dp0lib/*" clojure.main %*
