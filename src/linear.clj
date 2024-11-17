@@ -46,5 +46,5 @@
 
 (defn m*m [& mats]
   (reduce (fn [res next]
-            (mapv #(mapv (partial dot %) (transpose next)) res))
+            (all-oper #(m*v (transpose next) %) res))
           mats))
