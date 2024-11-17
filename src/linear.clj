@@ -1,7 +1,6 @@
 (ns linear)
 
-(defn all-oper
-  [oper & args]
+(defn all-oper [oper & args]
   (apply mapv oper args))
 
 (def v+
@@ -16,15 +15,13 @@
 (def vd
   (partial all-oper /))
 
-(defn dot
-  [& vecs]
+(defn dot [& vecs]
   (if (empty? vecs)
     0
-    (reduce + (apply mapv * vecs))))
+    (apply + (apply mapv * vecs))))
 
-(defn v*s
-  [vec & scs]
-  (mapv #(* (apply * scs) %) vec))
+(defn v*s [vec & scs]
+  (mapv #(apply * % scs) vec))
 
 (def m+
   (partial all-oper v+))
@@ -38,20 +35,16 @@
 (def md
   (partial all-oper vd))
 
-(defn m*s
-  [mat & scs]
+(defn m*s [mat & scs]
   (mapv #(apply v*s % scs) mat))
 
-(defn transpose
-  [mat]
+(defn transpose [mat]
   (apply mapv vector mat))
 
-(defn m*v
-  [mat vec]
+(defn m*v [mat vec]
   (mapv #(dot % vec) mat))
 
-(defn m*m
-  [& mats]
+(defn m*m [& mats]
   (reduce (fn [res next]
             (mapv #(mapv (partial dot %) (transpose next)) res))
           mats))
