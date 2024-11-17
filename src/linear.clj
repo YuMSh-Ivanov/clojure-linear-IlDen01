@@ -1,20 +1,20 @@
 (ns linear)
 
-(defn v+
-  [& vecs]
-  (apply mapv + vecs))
+(defn all-oper
+  [oper & args]
+  (apply mapv oper args))
 
-(defn v-
-  [& vecs]
-  (apply mapv - vecs))
+(def v+
+  (partial all-oper +))
 
-(defn v*
-  [& vecs]
-  (apply mapv * vecs))
+(def v-
+  (partial all-oper -))
 
-(defn vd
-  [& vecs]
-  (apply mapv / vecs))
+(def v*
+  (partial all-oper *))
+
+(def vd
+  (partial all-oper /))
 
 (defn dot
   [& vecs]
@@ -26,21 +26,17 @@
   [vec & scs]
   (mapv #(* (apply * scs) %) vec))
 
-(defn m+
-  [& mats]
-  (apply mapv v+ mats))
+(def m+
+  (partial all-oper v+))
 
-(defn m-
-  [& mats]
-  (apply mapv v- mats))
+(def m-
+  (partial all-oper v-))
 
-(defn m*
-  [& mats]
-  (apply mapv v* mats))
+(def m*
+  (partial all-oper v*))
 
-(defn md
-  [& mats]
-  (apply mapv vd mats))
+(def md
+  (partial all-oper vd))
 
 (defn m*s
   [mat & scs]
